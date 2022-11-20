@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/nav_header_drawer.xml",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/nav_header_drawer.xml"
+    },
+    {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_checkin.xml",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_checkin.xml"
     },
@@ -12,39 +16,31 @@
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/app_bar_main.xml"
     },
     {
-        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_inbox.xml",
-        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_inbox.xml"
-    },
-    {
-        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_news.xml",
-        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_news.xml"
-    },
-    {
-        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/layout_progress_dialog.xml",
-        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/layout_progress_dialog.xml"
-    },
-    {
-        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/nav_header_drawer.xml",
-        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/nav_header_drawer.xml"
-    },
-    {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_portfolio.xml",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_portfolio.xml"
     },
     {
-        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/event_item.xml",
-        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/event_item.xml"
-    },
-    {
-        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/activity_main.xml",
-        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/activity_main.xml"
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_inbox.xml",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_inbox.xml"
     },
     {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/news_item.xml",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/news_item.xml"
     },
     {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_news.xml",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_news.xml"
+    },
+    {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_viewmore.xml",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_viewmore.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/layout_progress_dialog.xml",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/layout_progress_dialog.xml"
     }
 ]
