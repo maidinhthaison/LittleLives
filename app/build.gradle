@@ -1,0 +1,171 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation'
+    }
+
+    defaultConfig {
+        applicationId "com.jetpack.demo"
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion  project.compileSdkVersion
+        versionCode project.versionCode
+        versionName project.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        signingConfigs {
+            release {
+                storePassword '123456'
+                keyPassword '123456'
+                keyAlias 'mykeystore'
+                storeFile file('../my_keystore.jks')
+            }
+            debug{
+
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            applicationIdSuffix = ".debug"
+            signingConfig signingConfigs.debug
+        }
+
+    }
+    compileOptions {
+        incremental = false
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    /**
+     *
+     */
+    flavorDimensions "environment"
+    productFlavors {
+        develop {
+            dimension = "environment"
+            versionNameSuffix = "dev"
+            applicationIdSuffix = ".dev"
+            manifestPlaceholders = [applicationName: "Little Lives Dev"]
+            resValue "string", "app_name", "Little Lives Dev"
+        }
+
+        staging {
+            dimension = "environment"
+            versionNameSuffix = "staging"
+            applicationIdSuffix = ".staging"
+            manifestPlaceholders = [applicationName: "Little Lives Stg"]
+            resValue "string", "app_name", "Little Lives Stg"
+        }
+
+        production {
+            dimension = "environment"
+            manifestPlaceholders = [applicationName: "@string/app_name"]
+            resValue "string", "app_name", "Little Lives"
+        }
+
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.getName() == "developDebug" || variant.getName() == "stagingDebug" ||
+                variant.getName() == "productionDebug") {
+            variant.buildConfigField "String", "BASE_API_URL", "\"https://littlelives.com/\""
+        } else {
+            variant.buildConfigField "String", "BASE_API_URL", "\"https://littlelives.com/\""
+        }
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    /**
+     * Libraries
+     */
+    // Architectural Components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+    implementation 'androidx.fragment:fragment-ktx:1.3.0'
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
+
+    // Activity KTX for viewModels()
+    implementation "androidx.activity:activity-ktx:1.2.0"
+
+    //Dagger - Hilt
+    implementation "com.google.dagger:hilt-android:2.32-alpha"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+
+    kapt "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha03"
+
+    // Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha05"
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    def work_version = "2.5.0"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    // Worker Manager
+    implementation 'androidx.hilt:hilt-work:1.0.0-alpha03'
+    // When using Kotlin.
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha03'
+}

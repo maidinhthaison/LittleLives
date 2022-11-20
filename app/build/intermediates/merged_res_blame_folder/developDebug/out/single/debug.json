@@ -1,0 +1,170 @@
+[
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_nav_header_drawer.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/nav_header_drawer.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_logout_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_logout_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_side_nav_bar.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/side_nav_bar.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_add_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_add_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_account_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_account_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_fragment_portfolio.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_portfolio.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_profile_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_profile_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_bg_btn_rounded_transparent.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/bg_btn_rounded_transparent.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/menu_drawer_menu.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/menu/drawer_menu.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_more_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_more_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_fragment_inbox.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_inbox.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_download_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_download_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_grid_view_24.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_grid_view_24.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/raw_user_stories.json.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/raw/user_stories.json"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_app_bar_main.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/app_bar_main.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_activity_main.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_sticky_date_item.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/sticky_date_item.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_news_item.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/news_item.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_bg_btn_rounded.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/bg_btn_rounded.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_inbox_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_inbox_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_fragment_checkin.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_checkin.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_fragment_viewmore.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_viewmore.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_layout_progress_dialog.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/layout_progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_fragment_news.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_news.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_account_circle_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_account_circle_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_portfolio_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_portfolio_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/drawable_ic_event_48.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/drawable/ic_event_48.xml"
+    },
+    {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    }
+]

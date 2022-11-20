@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/news_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_48"
+        android:title="@string/news_menu_label"/>
+    <item
+        android:id="@+id/checkin_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_account_48"
+        android:title="@string/checkin_menu_label"/>
+    <item
+        android:id="@+id/inbox_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_inbox_48"
+        android:title="@string/inbox_menu_label"/>
+    <item
+        android:id="@+id/portfolio_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_portfolio_48"
+        android:title="@string/portfolio_menu_label"/>
+    <item
+        android:id="@+id/more_menu_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_more_48"
+        android:title="@string/viewmore_menu_label"/>
+</menu>

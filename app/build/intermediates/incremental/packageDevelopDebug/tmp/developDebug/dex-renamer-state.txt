@@ -1,0 +1,10 @@
+#Mon Nov 21 01:25:10 ICT 2022
+base.2=/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/dex/developDebug/mergeExtDexDevelopDebug/classes2.dex
+path.2=classes2.dex
+base.1=/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/dex/developDebug/mergeProjectDexDevelopDebug/classes.dex
+path.1=classes.dex
+base.0=/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/dex/developDebug/mergeExtDexDevelopDebug/classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=classes.dex
