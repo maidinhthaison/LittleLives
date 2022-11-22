@@ -1,9 +1,7 @@
 package di
 
 import android.content.Context
-import android.graphics.Bitmap
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.Registry
@@ -16,7 +14,6 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.module.AppGlideModule
-import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.jetpack.demo.R
 import java.io.InputStream
 import java.util.regex.Pattern

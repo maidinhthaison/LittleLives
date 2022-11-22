@@ -7,13 +7,13 @@ import androidx.fragment.app.FragmentManager
 import com.jetpack.demo.R
 import utils.ProgressDialogFragment
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment, tag: String){
+fun AppCompatActivity.replaceFragment(fragment: Fragment, placeHolder: Int, tag: String){
     val fragmentTransaction = supportFragmentManager.beginTransaction()
-    fragmentTransaction.replace(R.id.mainContainer, fragment, tag)
+    fragmentTransaction.replace(placeHolder, fragment, tag)
     fragmentTransaction.commit()
 }
 
-fun Fragment.replaceFragment(fragment: Fragment, tag: String){
+fun Fragment.replaceFragment(fragment: Fragment,placeHolder: Int, tag: String){
     val fragmentTransaction = childFragmentManager.beginTransaction()
     fragmentTransaction.replace(R.id.mainContainer, fragment, tag)
     fragmentTransaction.commit()

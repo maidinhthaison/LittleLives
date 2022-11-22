@@ -59,22 +59,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             when(it.itemId) {
                 R.id.news_menu_item -> {
                     val fragment = NewsFragment.newInstance()
-                    replaceFragment(fragment, NewsFragmentTAG)
+                    replaceFragment(fragment,R.id.mainContainer, NewsFragmentTAG)
                     true
                 }
                 R.id.checkin_menu_item -> {
                     val fragment = CheckInFragment.newInstance()
-                    replaceFragment(fragment, CheckInFragmentTAG)
+                    replaceFragment(fragment,R.id.mainContainer, CheckInFragmentTAG)
                     true
                 }
                 R.id.inbox_menu_item -> {
                     val fragment = InboxFragment.newInstance()
-                    replaceFragment(fragment, InboxFragmentTAG)
+                    replaceFragment(fragment,R.id.mainContainer, InboxFragmentTAG)
                     true
                 }
                 R.id.portfolio_menu_item -> {
                     val fragment = PortfolioFragment.newInstance()
-                    replaceFragment(fragment, PortfolioFragmentTAG)
+                    replaceFragment(fragment,R.id.mainContainer, PortfolioFragmentTAG)
                     true
                 }
                 R.id.more_menu_item -> {
@@ -91,16 +91,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        var badgeInbox = bottomNavigationView.getOrCreateBadge(R.id.inbox_menu_item)
+        val badgeInbox = bottomNavigationView.getOrCreateBadge(R.id.inbox_menu_item)
         badgeInbox.isVisible = true
         badgeInbox.number = 93
 
-        var badgeMore = bottomNavigationView.getOrCreateBadge(R.id.more_menu_item)
+        val badgeMore = bottomNavigationView.getOrCreateBadge(R.id.more_menu_item)
         badgeMore.isVisible = true
 
         // When we open the application first time the fragment should be shown to the user in this case it is news fragment
         val newsFragment = NewsFragment.newInstance()
-        replaceFragment(newsFragment, NewsFragmentTAG)
+        replaceFragment(newsFragment,R.id.mainContainer, NewsFragmentTAG)
 
     }
 
@@ -133,21 +133,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.nav_news -> {
                 fragment = NewsFragment.newInstance()
-                replaceFragment(fragment, NewsFragmentTAG)
+                replaceFragment(fragment,R.id.mainContainer, NewsFragmentTAG)
+                bottomNavigationView.selectedItemId = R.id.news_menu_item
             }
             R.id.nav_checkin -> {
                 fragment = CheckInFragment.newInstance()
-                replaceFragment(fragment, CheckInFragmentTAG)
+                replaceFragment(fragment,R.id.mainContainer, CheckInFragmentTAG)
+                bottomNavigationView.selectedItemId = R.id.checkin_menu_item
 
             }
             R.id.nav_inbox -> {
                 fragment = InboxFragment.newInstance()
-                replaceFragment(fragment, InboxFragmentTAG)
+                replaceFragment(fragment,R.id.mainContainer, InboxFragmentTAG)
+                bottomNavigationView.selectedItemId = R.id.inbox_menu_item
 
             }
             R.id.nav_portfolio -> {
                 fragment = PortfolioFragment.newInstance()
-                replaceFragment(fragment, PortfolioFragmentTAG)
+                replaceFragment(fragment,R.id.mainContainer, PortfolioFragmentTAG)
+                bottomNavigationView.selectedItemId = R.id.portfolio_menu_item
 
             }
             R.id.nav_profile -> {
@@ -167,6 +171,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer.closeDrawer(GravityCompat.END)
         }
         binding.navView.setCheckedItem(id)
+
         return true
     }
     companion object{
@@ -174,6 +179,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         const val CheckInFragmentTAG ="checkin"
         const val InboxFragmentTAG ="inbox"
         const val PortfolioFragmentTAG ="portfolio"
-        const val MoreFragmentTAG ="more"
     }
 }
