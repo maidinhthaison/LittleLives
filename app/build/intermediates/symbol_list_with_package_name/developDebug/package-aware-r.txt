@@ -2596,9 +2596,12 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string checkin_menu_label
+string checkinout_list_item_caption
 string chip_text
 string clear_text_end_icon_content_description
 string error_icon_content_description
+string event_list_item_caption
+string everydayHealth_list_item_caption
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -2668,6 +2671,7 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string please_wait
+string portfolio_list_item_caption
 string portfolio_menu_label
 string processing
 string profile

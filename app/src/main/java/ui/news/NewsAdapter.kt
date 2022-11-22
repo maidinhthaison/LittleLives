@@ -96,7 +96,7 @@ class NewsAdapter(
             when (item.userTimeLine?.eventType) {
                 Event -> {
                     imvEventBullet.setImageResource(R.drawable.ic_event_48)
-                    tvEventType.text = item.userTimeLine?.eventType
+                    tvEventType.text = context.getString(R.string.event_list_item_caption)
                     val text = item.userTimeLine?.eventSnapshotData?.formatDisplayEventName(
                         context.getString(R.string.text_create_event)
                     )
@@ -110,7 +110,7 @@ class NewsAdapter(
                 }
                 CheckIn, CheckOut -> {
                     imvEventBullet.setImageResource(R.drawable.ic_account_48)
-                    tvEventType.text = "check in & out"
+                    tvEventType.text = context.getString(R.string.checkinout_list_item_caption)
 
                     val oldText: String = item.userTimeLine?.eventDescription.toString()
                     val htmlText =
@@ -130,7 +130,7 @@ class NewsAdapter(
                 }
                 Portfolio -> {
                     imvEventBullet.setImageResource(R.drawable.ic_portfolio_48)
-                    tvEventType.text = "portfolio"
+                    tvEventType.text = context.getString(R.string.portfolio_list_item_caption)
                     tvEventDesc.text = item.userTimeLine?.eventDescription
 
                     llItemAction.isVisible = false
@@ -146,7 +146,7 @@ class NewsAdapter(
                         ?.substringAfterLast(".").toString()
                     val fileUrl = item?.userTimeLine?.storyExportedSnapshotData?.url.toString()
                     imvEventBullet.setImageResource(R.drawable.ic_portfolio_48)
-                    tvEventType.text = "portfolio"
+                    tvEventType.text = context.getString(R.string.portfolio_list_item_caption)
 
                     tvEventDesc.text = text
                     imvEventItem.isVisible = false
@@ -163,7 +163,7 @@ class NewsAdapter(
                 }
                 StoryPublished -> {
                     imvEventBullet.setImageResource(R.drawable.ic_portfolio_48)
-                    tvEventType.text = "portfolio"
+                    tvEventType.text = context.getString(R.string.portfolio_list_item_caption)
 
                     val oldText: String = item.userTimeLine?.eventDescription.toString()
                     val htmlText =
@@ -179,7 +179,7 @@ class NewsAdapter(
                 EveryDayHealth -> {
                     imvEventBullet.setImageResource(R.drawable.ic_event_48)
 
-                    tvEventType.text = item?.userTimeLine?.eventType
+                    tvEventType.text = context.getString(R.string.everydayHealth_list_item_caption)
                     tvEventDesc.text = item.userTimeLine?.eventDate
 
                     llItemAction.isVisible = false
