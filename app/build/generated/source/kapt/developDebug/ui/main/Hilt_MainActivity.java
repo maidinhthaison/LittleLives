@@ -1,8 +1,7 @@
 package ui.main;
 
-import android.os.Bundle;
-import androidx.annotation.CallSuper;
-import androidx.annotation.Nullable;
+import android.content.Context;
+import androidx.activity.contextaware.OnContextAvailableListener;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories;
@@ -24,17 +23,21 @@ public abstract class Hilt_MainActivity extends AppCompatActivity implements Gen
 
   Hilt_MainActivity() {
     super();
+    _initHiltInternal();
   }
 
   Hilt_MainActivity(int contentLayoutId) {
     super(contentLayoutId);
+    _initHiltInternal();
   }
 
-  @CallSuper
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    inject();
-    super.onCreate(savedInstanceState);
+  private void _initHiltInternal() {
+    addOnContextAvailableListener(new OnContextAvailableListener() {
+      @Override
+      public void onContextAvailable(Context context) {
+        inject();
+      }
+    });
   }
 
   @Override
@@ -67,6 +70,6 @@ public abstract class Hilt_MainActivity extends AppCompatActivity implements Gen
 
   @Override
   public ViewModelProvider.Factory getDefaultViewModelProviderFactory() {
-    return DefaultViewModelFactories.getActivityFactory(this);
+    return DefaultViewModelFactories.getActivityFactory(this, super.getDefaultViewModelProviderFactory());
   }
 }

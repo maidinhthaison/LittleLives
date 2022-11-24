@@ -1,18 +1,26 @@
 package data.response
 
 import android.os.Parcelable
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
+import di.LocalModule
 import kotlinx.parcelize.Parcelize
 import utils.constant.*
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-private val gson: Gson = GsonBuilder().run {
-    create()
+private val gson: Gson = LocalModule.provideGson().apply {
+    GsonBuilder().apply {
+        enableComplexMapKeySerialization()
+        serializeNulls()
+        setDateFormat(DateFormat.LONG)
+        setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+        setPrettyPrinting()
+      }.create()
 }
-
 @Parcelize
 data class EventData(
     @SerializedName("data")

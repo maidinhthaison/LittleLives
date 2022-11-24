@@ -2,8 +2,8 @@ package main
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
+import androidx.viewbinding.BuildConfig
 import androidx.work.Configuration
-import com.jetpack.demo.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import utils.ReleaseTree
@@ -28,4 +28,6 @@ class MainApplication : Application(), Configuration.Provider {
         Configuration.Builder()
             .setWorkerFactory(workerFactory)
             .build()
+
+
 }

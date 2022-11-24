@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.jetpack.demo.R
 import data.response.EventData
+import di.LocalModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class AppLocalDataSource @Inject constructor(
     private val dataStore: DataStore<Preferences>,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val gson: Gson
+    private val gson: Gson = LocalModule.provideGson()
 ): BaseLocalDataSource(){
     /**
      * ### Return uuid from DataStore

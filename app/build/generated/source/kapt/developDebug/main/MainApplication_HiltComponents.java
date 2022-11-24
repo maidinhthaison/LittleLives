@@ -23,6 +23,7 @@ import dagger.hilt.android.internal.builders.ViewWithFragmentComponentBuilder;
 import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories;
 import dagger.hilt.android.internal.lifecycle.HiltViewModelFactory;
 import dagger.hilt.android.internal.lifecycle.HiltWrapper_DefaultViewModelFactories_ActivityModule;
+import dagger.hilt.android.internal.lifecycle.HiltWrapper_HiltViewModelFactory_ActivityCreatorEntryPoint;
 import dagger.hilt.android.internal.lifecycle.HiltWrapper_HiltViewModelFactory_ViewModelModule;
 import dagger.hilt.android.internal.managers.ActivityComponentManager;
 import dagger.hilt.android.internal.managers.FragmentComponentManager;
@@ -179,6 +180,7 @@ public final class MainApplication_HiltComponents {
   @ActivityScoped
   public abstract static class ActivityC implements ActivityComponent,
       DefaultViewModelFactories.ActivityEntryPoint,
+      HiltWrapper_HiltViewModelFactory_ActivityCreatorEntryPoint,
       FragmentComponentManager.FragmentComponentBuilderEntryPoint,
       ViewComponentManager.ViewComponentBuilderEntryPoint,
       GeneratedComponent,

@@ -52,7 +52,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         binding.navView.setNavigationItemSelectedListener(this)
-
+        /**
+         * Bottom navigation view
+         */
 
         bottomNavigationView= binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -60,21 +62,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.news_menu_item -> {
                     val fragment = NewsFragment.newInstance()
                     replaceFragment(fragment,R.id.mainContainer, NewsFragmentTAG)
+                    binding.navView.setCheckedItem(R.id.nav_news)
                     true
                 }
                 R.id.checkin_menu_item -> {
                     val fragment = CheckInFragment.newInstance()
                     replaceFragment(fragment,R.id.mainContainer, CheckInFragmentTAG)
+                    binding.navView.setCheckedItem(R.id.nav_checkin)
                     true
                 }
                 R.id.inbox_menu_item -> {
                     val fragment = InboxFragment.newInstance()
                     replaceFragment(fragment,R.id.mainContainer, InboxFragmentTAG)
+                    binding.navView.setCheckedItem(R.id.nav_inbox)
                     true
                 }
                 R.id.portfolio_menu_item -> {
                     val fragment = PortfolioFragment.newInstance()
                     replaceFragment(fragment,R.id.mainContainer, PortfolioFragmentTAG)
+                    binding.navView.setCheckedItem(R.id.nav_portfolio)
                     true
                 }
                 R.id.more_menu_item -> {

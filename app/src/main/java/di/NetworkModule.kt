@@ -61,7 +61,7 @@ object NetworkModule {
         return clientBuilder.build()
     }
 
-    // TODO remove it after server fix ssl error
+    // TODO apply if server has ssl error
     private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
         val x509TrustManager = object: X509TrustManager {
             override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {

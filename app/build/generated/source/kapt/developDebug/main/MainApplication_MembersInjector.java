@@ -3,9 +3,11 @@ package main;
 
 import androidx.hilt.work.HiltWorkerFactory;
 import dagger.MembersInjector;
+import dagger.internal.DaggerGenerated;
 import dagger.internal.InjectedFieldSignature;
 import javax.inject.Provider;
 
+@DaggerGenerated
 @SuppressWarnings({
     "unchecked",
     "rawtypes"

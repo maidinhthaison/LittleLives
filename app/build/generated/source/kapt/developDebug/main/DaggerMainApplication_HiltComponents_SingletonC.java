@@ -7,16 +7,12 @@ import android.view.View;
 import androidx.datastore.core.DataStore;
 import androidx.datastore.preferences.core.Preferences;
 import androidx.fragment.app.Fragment;
-import androidx.hilt.lifecycle.ViewModelAssistedFactory;
-import androidx.hilt.lifecycle.ViewModelFactoryModules_ActivityModule_ProvideFactoryFactory;
-import androidx.hilt.lifecycle.ViewModelFactoryModules_FragmentModule_ProvideFactoryFactory;
 import androidx.hilt.work.HiltWorkerFactory;
 import androidx.hilt.work.HiltWrapper_WorkerFactoryModule;
 import androidx.hilt.work.WorkerAssistedFactory;
 import androidx.hilt.work.WorkerFactoryModule_ProvideFactoryFactory;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.work.ListenableWorker;
 import com.google.gson.Gson;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -25,6 +21,7 @@ import dagger.hilt.android.internal.builders.ActivityRetainedComponentBuilder;
 import dagger.hilt.android.internal.builders.FragmentComponentBuilder;
 import dagger.hilt.android.internal.builders.ServiceComponentBuilder;
 import dagger.hilt.android.internal.builders.ViewComponentBuilder;
+import dagger.hilt.android.internal.builders.ViewModelComponentBuilder;
 import dagger.hilt.android.internal.builders.ViewWithFragmentComponentBuilder;
 import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories;
 import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories_InternalFactoryFactory_Factory;
@@ -32,8 +29,8 @@ import dagger.hilt.android.internal.managers.ActivityRetainedComponentManager_Li
 import dagger.hilt.android.internal.modules.ApplicationContextModule;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideApplicationFactory;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
+import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
-import dagger.internal.MemoizedSentinel;
 import dagger.internal.Preconditions;
 import data.local.AppLocalDataSource;
 import data.remote.NewsRemoteDataSource;
@@ -64,6 +61,7 @@ import ui.news.NewsViewModel_HiltModules_KeyModule_ProvideFactory;
 import ui.news.fragment.NewsFragment;
 import ui.portfolio.fragment.PortfolioFragment;
 
+@DaggerGenerated
 @SuppressWarnings({
     "unchecked",
     "rawtypes"
@@ -71,17 +69,21 @@ import ui.portfolio.fragment.PortfolioFragment;
 public final class DaggerMainApplication_HiltComponents_SingletonC extends MainApplication_HiltComponents.SingletonC {
   private final ApplicationContextModule applicationContextModule;
 
-  private volatile Object dataStoreOfPreferences = new MemoizedSentinel();
+  private final DaggerMainApplication_HiltComponents_SingletonC singletonC = this;
 
-  private volatile Object gson = new MemoizedSentinel();
+  private Provider<DataStore<Preferences>> provideDataStoreProvider;
 
-  private volatile Object apiAppService = new MemoizedSentinel();
+  private Provider<Gson> provideGsonProvider;
 
-  private volatile Object newsRepository = new MemoizedSentinel();
+  private Provider<ApiAppService> provideAuthServiceProvider;
+
+  private Provider<NewsRepository> provideNewsRepositoryProvider;
 
   private DaggerMainApplication_HiltComponents_SingletonC(
       ApplicationContextModule applicationContextModuleParam) {
     this.applicationContextModule = applicationContextModuleParam;
+    initialize(applicationContextModuleParam);
+
   }
 
   public static Builder builder() {
@@ -93,35 +95,11 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
   }
 
   private DataStore<Preferences> dataStoreOfPreferences() {
-    Object local = dataStoreOfPreferences;
-    if (local instanceof MemoizedSentinel) {
-      synchronized (local) {
-        local = dataStoreOfPreferences;
-        if (local instanceof MemoizedSentinel) {
-          local = LocalModule_ProvideDataStoreFactory.provideDataStore(ApplicationContextModule_ProvideContextFactory.provideContext(applicationContextModule));
-          dataStoreOfPreferences = DoubleCheck.reentrantCheck(dataStoreOfPreferences, local);
-        }
-      }
-    }
-    return (DataStore<Preferences>) local;
-  }
-
-  private Gson gson() {
-    Object local = gson;
-    if (local instanceof MemoizedSentinel) {
-      synchronized (local) {
-        local = gson;
-        if (local instanceof MemoizedSentinel) {
-          local = LocalModule_ProvideGsonFactory.provideGson();
-          gson = DoubleCheck.reentrantCheck(gson, local);
-        }
-      }
-    }
-    return (Gson) local;
+    return LocalModule_ProvideDataStoreFactory.provideDataStore(ApplicationContextModule_ProvideContextFactory.provideContext(applicationContextModule));
   }
 
   private AppLocalDataSource appLocalDataSource() {
-    return new AppLocalDataSource(dataStoreOfPreferences(), NetworkModule_ProvideCoroutineDispatcherFactory.provideCoroutineDispatcher(), gson());
+    return new AppLocalDataSource(provideDataStoreProvider.get(), NetworkModule_ProvideCoroutineDispatcherFactory.provideCoroutineDispatcher(), provideGsonProvider.get());
   }
 
   private OkHttpClient authInterceptorOkHttpClientOkHttpClient() {
@@ -129,45 +107,33 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
   }
 
   private ApiAppService apiAppService() {
-    Object local = apiAppService;
-    if (local instanceof MemoizedSentinel) {
-      synchronized (local) {
-        local = apiAppService;
-        if (local instanceof MemoizedSentinel) {
-          local = NetworkModule_ProvideAuthServiceFactory.provideAuthService(authInterceptorOkHttpClientOkHttpClient(), NetworkModule_ProvideGsonFactoryFactory.provideGsonFactory());
-          apiAppService = DoubleCheck.reentrantCheck(apiAppService, local);
-        }
-      }
-    }
-    return (ApiAppService) local;
+    return NetworkModule_ProvideAuthServiceFactory.provideAuthService(authInterceptorOkHttpClientOkHttpClient(), NetworkModule_ProvideGsonFactoryFactory.provideGsonFactory());
   }
 
   private NewsRemoteDataSource newsRemoteDataSource() {
-    return new NewsRemoteDataSource(apiAppService(), NetworkModule_ProvideCoroutineDispatcherFactory.provideCoroutineDispatcher());
+    return new NewsRemoteDataSource(provideAuthServiceProvider.get(), NetworkModule_ProvideCoroutineDispatcherFactory.provideCoroutineDispatcher());
   }
 
   private NewsRepository newsRepository() {
-    Object local = newsRepository;
-    if (local instanceof MemoizedSentinel) {
-      synchronized (local) {
-        local = newsRepository;
-        if (local instanceof MemoizedSentinel) {
-          local = NewsRepositoryModule_ProvideNewsRepositoryFactory.provideNewsRepository(appLocalDataSource(), newsRemoteDataSource());
-          newsRepository = DoubleCheck.reentrantCheck(newsRepository, local);
-        }
-      }
-    }
-    return (NewsRepository) local;
+    return NewsRepositoryModule_ProvideNewsRepositoryFactory.provideNewsRepository(appLocalDataSource(), newsRemoteDataSource());
+  }
+
+  @SuppressWarnings("unchecked")
+  private void initialize(final ApplicationContextModule applicationContextModuleParam) {
+    this.provideDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<DataStore<Preferences>>(singletonC, 1));
+    this.provideGsonProvider = DoubleCheck.provider(new SwitchingProvider<Gson>(singletonC, 2));
+    this.provideAuthServiceProvider = DoubleCheck.provider(new SwitchingProvider<ApiAppService>(singletonC, 3));
+    this.provideNewsRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<NewsRepository>(singletonC, 0));
   }
 
   @Override
   public ActivityRetainedComponentBuilder retainedComponentBuilder() {
-    return new ActivityRetainedCBuilder();
+    return new ActivityRetainedCBuilder(singletonC);
   }
 
   @Override
   public ServiceComponentBuilder serviceComponentBuilder() {
-    return new ServiceCBuilder();
+    return new ServiceCBuilder(singletonC);
   }
 
   @Override
@@ -234,271 +200,170 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
     }
   }
 
-  private final class ActivityRetainedCBuilder implements MainApplication_HiltComponents.ActivityRetainedC.Builder {
+  private static final class ActivityRetainedCBuilder implements MainApplication_HiltComponents.ActivityRetainedC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private ActivityRetainedCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC) {
+      this.singletonC = singletonC;
+    }
+
     @Override
     public MainApplication_HiltComponents.ActivityRetainedC build() {
-      return new ActivityRetainedCImpl();
+      return new ActivityRetainedCImpl(singletonC);
     }
   }
 
-  private final class ActivityRetainedCImpl extends MainApplication_HiltComponents.ActivityRetainedC {
-    private volatile Object lifecycle = new MemoizedSentinel();
+  private static final class ActivityCBuilder implements MainApplication_HiltComponents.ActivityC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
 
-    private ActivityRetainedCImpl() {
+    private final ActivityRetainedCImpl activityRetainedCImpl;
 
-    }
+    private Activity activity;
 
-    private Object lifecycle() {
-      Object local = lifecycle;
-      if (local instanceof MemoizedSentinel) {
-        synchronized (local) {
-          local = lifecycle;
-          if (local instanceof MemoizedSentinel) {
-            local = ActivityRetainedComponentManager_Lifecycle_Factory.newInstance();
-            lifecycle = DoubleCheck.reentrantCheck(lifecycle, local);
-          }
-        }
-      }
-      return (Object) local;
+    private ActivityCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
     }
 
     @Override
-    public ActivityComponentBuilder activityComponentBuilder() {
-      return new ActivityCBuilder();
+    public ActivityCBuilder activity(Activity activity) {
+      this.activity = Preconditions.checkNotNull(activity);
+      return this;
     }
 
     @Override
-    public ActivityRetainedLifecycle getActivityRetainedLifecycle() {
-      return (ActivityRetainedLifecycle) lifecycle();
-    }
-
-    private final class ActivityCBuilder implements MainApplication_HiltComponents.ActivityC.Builder {
-      private Activity activity;
-
-      @Override
-      public ActivityCBuilder activity(Activity activity) {
-        this.activity = Preconditions.checkNotNull(activity);
-        return this;
-      }
-
-      @Override
-      public MainApplication_HiltComponents.ActivityC build() {
-        Preconditions.checkBuilderRequirement(activity, Activity.class);
-        return new ActivityCImpl(activity);
-      }
-    }
-
-    private final class ActivityCImpl extends MainApplication_HiltComponents.ActivityC {
-      private final Activity activity;
-
-      private ActivityCImpl(Activity activityParam) {
-        this.activity = activityParam;
-      }
-
-      private Set<String> keySetSetOfString() {
-        return Collections.<String>singleton(NewsViewModel_HiltModules_KeyModule_ProvideFactory.provide());
-      }
-
-      private ViewModelProvider.Factory provideFactory() {
-        return ViewModelFactoryModules_ActivityModule_ProvideFactoryFactory.provideFactory(activity, ApplicationContextModule_ProvideApplicationFactory.provideApplication(DaggerMainApplication_HiltComponents_SingletonC.this.applicationContextModule), Collections.<String, Provider<ViewModelAssistedFactory<? extends ViewModel>>>emptyMap());
-      }
-
-      private Set<ViewModelProvider.Factory> defaultActivityViewModelFactorySetOfViewModelProviderFactory(
-          ) {
-        return Collections.<ViewModelProvider.Factory>singleton(provideFactory());
-      }
-
-      @Override
-      public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
-        return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(ApplicationContextModule_ProvideApplicationFactory.provideApplication(DaggerMainApplication_HiltComponents_SingletonC.this.applicationContextModule), keySetSetOfString(), new ViewModelCBuilder(), defaultActivityViewModelFactorySetOfViewModelProviderFactory(), Collections.<ViewModelProvider.Factory>emptySet());
-      }
-
-      @Override
-      public FragmentComponentBuilder fragmentComponentBuilder() {
-        return new FragmentCBuilder();
-      }
-
-      @Override
-      public ViewComponentBuilder viewComponentBuilder() {
-        return new ViewCBuilder();
-      }
-
-      @Override
-      public void injectMainActivity(MainActivity mainActivity) {
-      }
-
-      private final class FragmentCBuilder implements MainApplication_HiltComponents.FragmentC.Builder {
-        private Fragment fragment;
-
-        @Override
-        public FragmentCBuilder fragment(Fragment fragment) {
-          this.fragment = Preconditions.checkNotNull(fragment);
-          return this;
-        }
-
-        @Override
-        public MainApplication_HiltComponents.FragmentC build() {
-          Preconditions.checkBuilderRequirement(fragment, Fragment.class);
-          return new FragmentCImpl(fragment);
-        }
-      }
-
-      private final class FragmentCImpl extends MainApplication_HiltComponents.FragmentC {
-        private final Fragment fragment;
-
-        private FragmentCImpl(Fragment fragmentParam) {
-          this.fragment = fragmentParam;
-        }
-
-        private ViewModelProvider.Factory provideFactory() {
-          return ViewModelFactoryModules_FragmentModule_ProvideFactoryFactory.provideFactory(fragment, ApplicationContextModule_ProvideApplicationFactory.provideApplication(DaggerMainApplication_HiltComponents_SingletonC.this.applicationContextModule), Collections.<String, Provider<ViewModelAssistedFactory<? extends ViewModel>>>emptyMap());
-        }
-
-        private Set<ViewModelProvider.Factory> defaultFragmentViewModelFactorySetOfViewModelProviderFactory(
-            ) {
-          return Collections.<ViewModelProvider.Factory>singleton(provideFactory());
-        }
-
-        @Override
-        public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
-          return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(ApplicationContextModule_ProvideApplicationFactory.provideApplication(DaggerMainApplication_HiltComponents_SingletonC.this.applicationContextModule), ActivityCImpl.this.keySetSetOfString(), new ViewModelCBuilder(), ActivityCImpl.this.defaultActivityViewModelFactorySetOfViewModelProviderFactory(), defaultFragmentViewModelFactorySetOfViewModelProviderFactory());
-        }
-
-        @Override
-        public ViewWithFragmentComponentBuilder viewWithFragmentComponentBuilder() {
-          return new ViewWithFragmentCBuilder();
-        }
-
-        @Override
-        public void injectCheckInFragment(CheckInFragment checkInFragment) {
-        }
-
-        @Override
-        public void injectInboxFragment(InboxFragment inboxFragment) {
-        }
-
-        @Override
-        public void injectViewMoreFragment(ViewMoreFragment viewMoreFragment) {
-        }
-
-        @Override
-        public void injectNewsFragment(NewsFragment newsFragment) {
-        }
-
-        @Override
-        public void injectPortfolioFragment(PortfolioFragment portfolioFragment) {
-        }
-
-        private final class ViewWithFragmentCBuilder implements MainApplication_HiltComponents.ViewWithFragmentC.Builder {
-          private View view;
-
-          @Override
-          public ViewWithFragmentCBuilder view(View view) {
-            this.view = Preconditions.checkNotNull(view);
-            return this;
-          }
-
-          @Override
-          public MainApplication_HiltComponents.ViewWithFragmentC build() {
-            Preconditions.checkBuilderRequirement(view, View.class);
-            return new ViewWithFragmentCImpl(view);
-          }
-        }
-
-        private final class ViewWithFragmentCImpl extends MainApplication_HiltComponents.ViewWithFragmentC {
-          private ViewWithFragmentCImpl(View view) {
-
-          }
-        }
-      }
-
-      private final class ViewCBuilder implements MainApplication_HiltComponents.ViewC.Builder {
-        private View view;
-
-        @Override
-        public ViewCBuilder view(View view) {
-          this.view = Preconditions.checkNotNull(view);
-          return this;
-        }
-
-        @Override
-        public MainApplication_HiltComponents.ViewC build() {
-          Preconditions.checkBuilderRequirement(view, View.class);
-          return new ViewCImpl(view);
-        }
-      }
-
-      private final class ViewCImpl extends MainApplication_HiltComponents.ViewC {
-        private ViewCImpl(View view) {
-
-        }
-      }
-    }
-
-    private final class ViewModelCBuilder implements MainApplication_HiltComponents.ViewModelC.Builder {
-      private SavedStateHandle savedStateHandle;
-
-      @Override
-      public ViewModelCBuilder savedStateHandle(SavedStateHandle handle) {
-        this.savedStateHandle = Preconditions.checkNotNull(handle);
-        return this;
-      }
-
-      @Override
-      public MainApplication_HiltComponents.ViewModelC build() {
-        Preconditions.checkBuilderRequirement(savedStateHandle, SavedStateHandle.class);
-        return new ViewModelCImpl(savedStateHandle);
-      }
-    }
-
-    private final class ViewModelCImpl extends MainApplication_HiltComponents.ViewModelC {
-      private volatile Provider<NewsViewModel> newsViewModelProvider;
-
-      private ViewModelCImpl(SavedStateHandle savedStateHandle) {
-
-      }
-
-      private NewsViewModel newsViewModel() {
-        return new NewsViewModel(DaggerMainApplication_HiltComponents_SingletonC.this.newsRepository());
-      }
-
-      private Provider<NewsViewModel> newsViewModelProvider() {
-        Object local = newsViewModelProvider;
-        if (local == null) {
-          local = new SwitchingProvider<>(0);
-          newsViewModelProvider = (Provider<NewsViewModel>) local;
-        }
-        return (Provider<NewsViewModel>) local;
-      }
-
-      @Override
-      public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
-        return Collections.<String, Provider<ViewModel>>singletonMap("ui.news.NewsViewModel", (Provider) newsViewModelProvider());
-      }
-
-      private final class SwitchingProvider<T> implements Provider<T> {
-        private final int id;
-
-        SwitchingProvider(int id) {
-          this.id = id;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public T get() {
-          switch (id) {
-            case 0: // ui.news.NewsViewModel 
-            return (T) ViewModelCImpl.this.newsViewModel();
-
-            default: throw new AssertionError(id);
-          }
-        }
-      }
+    public MainApplication_HiltComponents.ActivityC build() {
+      Preconditions.checkBuilderRequirement(activity, Activity.class);
+      return new ActivityCImpl(singletonC, activityRetainedCImpl, activity);
     }
   }
 
-  private final class ServiceCBuilder implements MainApplication_HiltComponents.ServiceC.Builder {
+  private static final class FragmentCBuilder implements MainApplication_HiltComponents.FragmentC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl;
+
+    private Fragment fragment;
+
+    private FragmentCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, ActivityCImpl activityCImpl) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+      this.activityCImpl = activityCImpl;
+    }
+
+    @Override
+    public FragmentCBuilder fragment(Fragment fragment) {
+      this.fragment = Preconditions.checkNotNull(fragment);
+      return this;
+    }
+
+    @Override
+    public MainApplication_HiltComponents.FragmentC build() {
+      Preconditions.checkBuilderRequirement(fragment, Fragment.class);
+      return new FragmentCImpl(singletonC, activityRetainedCImpl, activityCImpl, fragment);
+    }
+  }
+
+  private static final class ViewWithFragmentCBuilder implements MainApplication_HiltComponents.ViewWithFragmentC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl;
+
+    private final FragmentCImpl fragmentCImpl;
+
+    private View view;
+
+    private ViewWithFragmentCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, ActivityCImpl activityCImpl,
+        FragmentCImpl fragmentCImpl) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+      this.activityCImpl = activityCImpl;
+      this.fragmentCImpl = fragmentCImpl;
+    }
+
+    @Override
+    public ViewWithFragmentCBuilder view(View view) {
+      this.view = Preconditions.checkNotNull(view);
+      return this;
+    }
+
+    @Override
+    public MainApplication_HiltComponents.ViewWithFragmentC build() {
+      Preconditions.checkBuilderRequirement(view, View.class);
+      return new ViewWithFragmentCImpl(singletonC, activityRetainedCImpl, activityCImpl, fragmentCImpl, view);
+    }
+  }
+
+  private static final class ViewCBuilder implements MainApplication_HiltComponents.ViewC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl;
+
+    private View view;
+
+    private ViewCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, ActivityCImpl activityCImpl) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+      this.activityCImpl = activityCImpl;
+    }
+
+    @Override
+    public ViewCBuilder view(View view) {
+      this.view = Preconditions.checkNotNull(view);
+      return this;
+    }
+
+    @Override
+    public MainApplication_HiltComponents.ViewC build() {
+      Preconditions.checkBuilderRequirement(view, View.class);
+      return new ViewCImpl(singletonC, activityRetainedCImpl, activityCImpl, view);
+    }
+  }
+
+  private static final class ViewModelCBuilder implements MainApplication_HiltComponents.ViewModelC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private SavedStateHandle savedStateHandle;
+
+    private ViewModelCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+    }
+
+    @Override
+    public ViewModelCBuilder savedStateHandle(SavedStateHandle handle) {
+      this.savedStateHandle = Preconditions.checkNotNull(handle);
+      return this;
+    }
+
+    @Override
+    public MainApplication_HiltComponents.ViewModelC build() {
+      Preconditions.checkBuilderRequirement(savedStateHandle, SavedStateHandle.class);
+      return new ViewModelCImpl(singletonC, activityRetainedCImpl, savedStateHandle);
+    }
+  }
+
+  private static final class ServiceCBuilder implements MainApplication_HiltComponents.ServiceC.Builder {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
     private Service service;
+
+    private ServiceCBuilder(DaggerMainApplication_HiltComponents_SingletonC singletonC) {
+      this.singletonC = singletonC;
+    }
 
     @Override
     public ServiceCBuilder service(Service service) {
@@ -509,13 +374,307 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
     @Override
     public MainApplication_HiltComponents.ServiceC build() {
       Preconditions.checkBuilderRequirement(service, Service.class);
-      return new ServiceCImpl(service);
+      return new ServiceCImpl(singletonC, service);
     }
   }
 
-  private final class ServiceCImpl extends MainApplication_HiltComponents.ServiceC {
-    private ServiceCImpl(Service service) {
+  private static final class ViewWithFragmentCImpl extends MainApplication_HiltComponents.ViewWithFragmentC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
 
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl;
+
+    private final FragmentCImpl fragmentCImpl;
+
+    private final ViewWithFragmentCImpl viewWithFragmentCImpl = this;
+
+    private ViewWithFragmentCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, ActivityCImpl activityCImpl,
+        FragmentCImpl fragmentCImpl, View viewParam) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+      this.activityCImpl = activityCImpl;
+      this.fragmentCImpl = fragmentCImpl;
+
+
+    }
+  }
+
+  private static final class FragmentCImpl extends MainApplication_HiltComponents.FragmentC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl;
+
+    private final FragmentCImpl fragmentCImpl = this;
+
+    private FragmentCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, ActivityCImpl activityCImpl,
+        Fragment fragmentParam) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+      this.activityCImpl = activityCImpl;
+
+
+    }
+
+    @Override
+    public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
+      return activityCImpl.getHiltInternalFactoryFactory();
+    }
+
+    @Override
+    public ViewWithFragmentComponentBuilder viewWithFragmentComponentBuilder() {
+      return new ViewWithFragmentCBuilder(singletonC, activityRetainedCImpl, activityCImpl, fragmentCImpl);
+    }
+
+    @Override
+    public void injectCheckInFragment(CheckInFragment checkInFragment) {
+    }
+
+    @Override
+    public void injectInboxFragment(InboxFragment inboxFragment) {
+    }
+
+    @Override
+    public void injectViewMoreFragment(ViewMoreFragment viewMoreFragment) {
+    }
+
+    @Override
+    public void injectNewsFragment(NewsFragment newsFragment) {
+    }
+
+    @Override
+    public void injectPortfolioFragment(PortfolioFragment portfolioFragment) {
+    }
+  }
+
+  private static final class ViewCImpl extends MainApplication_HiltComponents.ViewC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl;
+
+    private final ViewCImpl viewCImpl = this;
+
+    private ViewCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, ActivityCImpl activityCImpl, View viewParam) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+      this.activityCImpl = activityCImpl;
+
+
+    }
+  }
+
+  private static final class ActivityCImpl extends MainApplication_HiltComponents.ActivityC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ActivityCImpl activityCImpl = this;
+
+    private ActivityCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, Activity activityParam) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+
+
+    }
+
+    @Override
+    public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
+      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonC.applicationContextModule), getViewModelKeys(), new ViewModelCBuilder(singletonC, activityRetainedCImpl));
+    }
+
+    @Override
+    public Set<String> getViewModelKeys() {
+      return Collections.<String>singleton(NewsViewModel_HiltModules_KeyModule_ProvideFactory.provide());
+    }
+
+    @Override
+    public ViewModelComponentBuilder getViewModelComponentBuilder() {
+      return new ViewModelCBuilder(singletonC, activityRetainedCImpl);
+    }
+
+    @Override
+    public FragmentComponentBuilder fragmentComponentBuilder() {
+      return new FragmentCBuilder(singletonC, activityRetainedCImpl, activityCImpl);
+    }
+
+    @Override
+    public ViewComponentBuilder viewComponentBuilder() {
+      return new ViewCBuilder(singletonC, activityRetainedCImpl, activityCImpl);
+    }
+
+    @Override
+    public void injectMainActivity(MainActivity mainActivity) {
+    }
+  }
+
+  private static final class ViewModelCImpl extends MainApplication_HiltComponents.ViewModelC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl;
+
+    private final ViewModelCImpl viewModelCImpl = this;
+
+    private Provider<NewsViewModel> newsViewModelProvider;
+
+    private ViewModelCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam) {
+      this.singletonC = singletonC;
+      this.activityRetainedCImpl = activityRetainedCImpl;
+
+      initialize(savedStateHandleParam);
+
+    }
+
+    private NewsViewModel newsViewModel() {
+      return new NewsViewModel(singletonC.provideNewsRepositoryProvider.get());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize(final SavedStateHandle savedStateHandleParam) {
+      this.newsViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 0);
+    }
+
+    @Override
+    public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
+      return Collections.<String, Provider<ViewModel>>singletonMap("ui.news.NewsViewModel", (Provider) newsViewModelProvider);
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+      private final ActivityRetainedCImpl activityRetainedCImpl;
+
+      private final ViewModelCImpl viewModelCImpl;
+
+      private final int id;
+
+      SwitchingProvider(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+          ActivityRetainedCImpl activityRetainedCImpl, ViewModelCImpl viewModelCImpl, int id) {
+        this.singletonC = singletonC;
+        this.activityRetainedCImpl = activityRetainedCImpl;
+        this.viewModelCImpl = viewModelCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // ui.news.NewsViewModel 
+          return (T) viewModelCImpl.newsViewModel();
+
+          default: throw new AssertionError(id);
+        }
+      }
+    }
+  }
+
+  private static final class ActivityRetainedCImpl extends MainApplication_HiltComponents.ActivityRetainedC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ActivityRetainedCImpl activityRetainedCImpl = this;
+
+    @SuppressWarnings("rawtypes")
+    private Provider lifecycleProvider;
+
+    private ActivityRetainedCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC) {
+      this.singletonC = singletonC;
+
+      initialize();
+
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize() {
+      this.lifecycleProvider = DoubleCheck.provider(new SwitchingProvider<Object>(singletonC, activityRetainedCImpl, 0));
+    }
+
+    @Override
+    public ActivityComponentBuilder activityComponentBuilder() {
+      return new ActivityCBuilder(singletonC, activityRetainedCImpl);
+    }
+
+    @Override
+    public ActivityRetainedLifecycle getActivityRetainedLifecycle() {
+      return (ActivityRetainedLifecycle) lifecycleProvider.get();
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+      private final ActivityRetainedCImpl activityRetainedCImpl;
+
+      private final int id;
+
+      SwitchingProvider(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+          ActivityRetainedCImpl activityRetainedCImpl, int id) {
+        this.singletonC = singletonC;
+        this.activityRetainedCImpl = activityRetainedCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // dagger.hilt.android.internal.managers.ActivityRetainedComponentManager.Lifecycle 
+          return (T) ActivityRetainedComponentManager_Lifecycle_Factory.newInstance();
+
+          default: throw new AssertionError(id);
+        }
+      }
+    }
+  }
+
+  private static final class ServiceCImpl extends MainApplication_HiltComponents.ServiceC {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final ServiceCImpl serviceCImpl = this;
+
+    private ServiceCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
+        Service serviceParam) {
+      this.singletonC = singletonC;
+
+
+    }
+  }
+
+  private static final class SwitchingProvider<T> implements Provider<T> {
+    private final DaggerMainApplication_HiltComponents_SingletonC singletonC;
+
+    private final int id;
+
+    SwitchingProvider(DaggerMainApplication_HiltComponents_SingletonC singletonC, int id) {
+      this.singletonC = singletonC;
+      this.id = id;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public T get() {
+      switch (id) {
+        case 0: // data.repository.NewsRepository 
+        return (T) singletonC.newsRepository();
+
+        case 1: // androidx.datastore.core.DataStore<androidx.datastore.preferences.core.Preferences> 
+        return (T) singletonC.dataStoreOfPreferences();
+
+        case 2: // com.google.gson.Gson 
+        return (T) LocalModule_ProvideGsonFactory.provideGson();
+
+        case 3: // data.remote.api.ApiAppService 
+        return (T) singletonC.apiAppService();
+
+        default: throw new AssertionError(id);
+      }
     }
   }
 }

@@ -24,6 +24,9 @@ public final class NewsViewModel_HiltModules {
   @Module
   @InstallIn(ViewModelComponent.class)
   public abstract static class BindsModule {
+    private BindsModule() {
+    }
+
     @Binds
     @IntoMap
     @StringKey("ui.news.NewsViewModel")
