@@ -4,12 +4,10 @@ package di;
 import android.content.Context;
 import androidx.datastore.core.DataStore;
 import androidx.datastore.preferences.core.Preferences;
-import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import javax.inject.Provider;
 
-@DaggerGenerated
 @SuppressWarnings({
     "unchecked",
     "rawtypes"

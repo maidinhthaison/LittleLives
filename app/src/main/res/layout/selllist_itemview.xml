@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_20dp"
+    android:gravity="center_vertical"
+    android:layout_height="@dimen/_120dp">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        tools:text="AAAAAA"
+        android:id="@+id/tvProName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5dp"
+        android:textSize="@dimen/_14sp"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        tools:text="BBBBBB"
+        android:id="@+id/tvProPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5dp"
+        android:textSize="@dimen/_14sp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        tools:text="CCCCCC"
+        android:id="@+id/tvProQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5dp"
+        android:textSize="@dimen/_14sp" />
+
+</LinearLayout>

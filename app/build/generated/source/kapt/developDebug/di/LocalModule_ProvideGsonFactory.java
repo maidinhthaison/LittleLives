@@ -2,11 +2,9 @@
 package di;
 
 import com.google.gson.Gson;
-import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 
-@DaggerGenerated
 @SuppressWarnings({
     "unchecked",
     "rawtypes"

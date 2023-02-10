@@ -88,6 +88,10 @@
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_selllist_itemview.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/selllist_itemview.xml"
+    },
+    {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/raw_user_stories.json.flat",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/raw/user_stories.json"
     },

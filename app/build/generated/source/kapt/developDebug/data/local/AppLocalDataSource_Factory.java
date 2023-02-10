@@ -4,12 +4,10 @@ package data.local;
 import androidx.datastore.core.DataStore;
 import androidx.datastore.preferences.core.Preferences;
 import com.google.gson.Gson;
-import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import javax.inject.Provider;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-@DaggerGenerated
 @SuppressWarnings({
     "unchecked",
     "rawtypes"

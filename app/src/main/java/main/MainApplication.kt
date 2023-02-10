@@ -5,6 +5,10 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.viewbinding.BuildConfig
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
+import data.local.ItemToSellDB
+import data.repository.SellItemRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import timber.log.Timber
 import utils.ReleaseTree
 import javax.inject.Inject
@@ -15,8 +19,22 @@ class MainApplication : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
 
+    // No need to cancel this scope as it'll be torn down with the process
+    private val applicationScope = CoroutineScope(SupervisorJob())
+
+    // Using by lazy so the database and the repository are only created when they're needed
+    // rather than when the application starts
+    private val database by lazy { ItemToSellDB.getDatabase(this,applicationScope) }
+    val repository by lazy { SellItemRepository(database.sellItemDao()) }
+
+    companion object {
+        lateinit var instance: MainApplication
+            private set
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         } else {

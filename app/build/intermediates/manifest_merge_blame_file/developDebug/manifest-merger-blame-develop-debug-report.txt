@@ -253,25 +253,14 @@
 131            </intent-filter>
 132        </receiver>
 133
-134        <provider
-134-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/58e896aee917a4d71cb8a262b3d1e9ba/jetified-lifecycle-process-2.0.0/AndroidManifest.xml:23:9-27:43
-135            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-135-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/58e896aee917a4d71cb8a262b3d1e9ba/jetified-lifecycle-process-2.0.0/AndroidManifest.xml:24:13-79
-136            android:authorities="com.jetpack.demo.dev.debug.lifecycle-process"
-136-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/58e896aee917a4d71cb8a262b3d1e9ba/jetified-lifecycle-process-2.0.0/AndroidManifest.xml:25:13-69
-137            android:exported="false"
-137-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/58e896aee917a4d71cb8a262b3d1e9ba/jetified-lifecycle-process-2.0.0/AndroidManifest.xml:26:13-37
-138            android:multiprocess="true" />
-138-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/mac/.gradle/caches/transforms-2/files-2.1/58e896aee917a4d71cb8a262b3d1e9ba/jetified-lifecycle-process-2.0.0/AndroidManifest.xml:27:13-40
+134        <service
+134-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:25:9-28:40
+135            android:name="androidx.room.MultiInstanceInvalidationService"
+135-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:26:13-74
+136            android:directBootAware="true"
+136-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:27:13-43
+137            android:exported="false" />
+137-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:28:13-37
+138    </application>
 139
-140        <service
-140-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:25:9-28:40
-141            android:name="androidx.room.MultiInstanceInvalidationService"
-141-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:26:13-74
-142            android:directBootAware="true"
-142-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:27:13-43
-143            android:exported="false" />
-143-->[androidx.room:room-runtime:2.2.5] /Users/mac/.gradle/caches/transforms-2/files-2.1/a26b75a739d6eaaef50897a6528ab584/room-runtime-2.2.5/AndroidManifest.xml:28:13-37
-144    </application>
-145
-146</manifest>
+140</manifest>

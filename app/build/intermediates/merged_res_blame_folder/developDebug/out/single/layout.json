@@ -44,6 +44,10 @@
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/activity_main.xml"
     },
     {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/selllist_itemview.xml",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/selllist_itemview.xml"
+    },
+    {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/incremental/mergeDevelopDebugResources/stripped.dir/layout/fragment_viewmore.xml",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/fragment_viewmore.xml"
     }

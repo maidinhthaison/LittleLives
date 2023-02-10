@@ -44,7 +44,6 @@ public abstract class Hilt_InboxFragment extends Fragment implements GeneratedCo
   public void onAttach(Context context) {
     super.onAttach(context);
     initializeComponentContext();
-    inject();
   }
 
   @Override
@@ -54,22 +53,19 @@ public abstract class Hilt_InboxFragment extends Fragment implements GeneratedCo
     super.onAttach(activity);
     Preconditions.checkState(componentContext == null || FragmentComponentManager.findActivity(componentContext) == activity, "onAttach called multiple times with different Context! Hilt Fragments should not be retained.");
     initializeComponentContext();
-    inject();
   }
 
   private void initializeComponentContext() {
+    // Only inject on the first call to onAttach.
     if (componentContext == null) {
       // Note: The LayoutInflater provided by this componentContext may be different from super Fragment's because we getting it from base context instead of cloning from the super Fragment's LayoutInflater.
       componentContext = FragmentComponentManager.createContextWrapper(super.getContext(), this);
+      inject();
     }
   }
 
   @Override
   public Context getContext() {
-    if (super.getContext() == null && componentContext == null) {
-      return null;
-    }
-    initializeComponentContext();
     return componentContext;
   }
 
@@ -109,6 +105,6 @@ public abstract class Hilt_InboxFragment extends Fragment implements GeneratedCo
 
   @Override
   public ViewModelProvider.Factory getDefaultViewModelProviderFactory() {
-    return DefaultViewModelFactories.getFragmentFactory(this, super.getDefaultViewModelProviderFactory());
+    return DefaultViewModelFactories.getFragmentFactory(this);
   }
 }
