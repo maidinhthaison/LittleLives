@@ -31,11 +31,15 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideAppl
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
+import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
+import dagger.internal.SetBuilder;
 import data.local.AppLocalDataSource;
+import data.remote.CurrencyRemoteDataSource;
 import data.remote.NewsRemoteDataSource;
 import data.remote.api.ApiAppService;
 import data.remote.api.interceptor.AppInterceptor;
+import data.repository.CurrencyRepository;
 import data.repository.NewsRepository;
 import di.LocalModule;
 import di.LocalModule_ProvideDataStoreFactory;
@@ -46,12 +50,15 @@ import di.NetworkModule_ProvideAuthServiceFactory;
 import di.NetworkModule_ProvideCoroutineDispatcherFactory;
 import di.NetworkModule_ProvideGsonFactoryFactory;
 import di.NewsRepositoryModule;
+import di.NewsRepositoryModule_ProvideCurrencyRepositoryFactory;
 import di.NewsRepositoryModule_ProvideNewsRepositoryFactory;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import javax.inject.Provider;
 import okhttp3.OkHttpClient;
+import ui.checkin.CurrencyViewModel;
+import ui.checkin.CurrencyViewModel_HiltModules_KeyModule_ProvideFactory;
 import ui.checkin.fragment.CheckInFragment;
 import ui.inbox.fragment.InboxFragment;
 import ui.main.MainActivity;
@@ -76,6 +83,8 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
   private Provider<Gson> provideGsonProvider;
 
   private Provider<ApiAppService> provideAuthServiceProvider;
+
+  private Provider<CurrencyRepository> provideCurrencyRepositoryProvider;
 
   private Provider<NewsRepository> provideNewsRepositoryProvider;
 
@@ -110,6 +119,14 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
     return NetworkModule_ProvideAuthServiceFactory.provideAuthService(authInterceptorOkHttpClientOkHttpClient(), NetworkModule_ProvideGsonFactoryFactory.provideGsonFactory());
   }
 
+  private CurrencyRemoteDataSource currencyRemoteDataSource() {
+    return new CurrencyRemoteDataSource(provideAuthServiceProvider.get(), NetworkModule_ProvideCoroutineDispatcherFactory.provideCoroutineDispatcher());
+  }
+
+  private CurrencyRepository currencyRepository() {
+    return NewsRepositoryModule_ProvideCurrencyRepositoryFactory.provideCurrencyRepository(appLocalDataSource(), currencyRemoteDataSource());
+  }
+
   private NewsRemoteDataSource newsRemoteDataSource() {
     return new NewsRemoteDataSource(provideAuthServiceProvider.get(), NetworkModule_ProvideCoroutineDispatcherFactory.provideCoroutineDispatcher());
   }
@@ -123,7 +140,8 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
     this.provideDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<DataStore<Preferences>>(singletonC, 1));
     this.provideGsonProvider = DoubleCheck.provider(new SwitchingProvider<Gson>(singletonC, 2));
     this.provideAuthServiceProvider = DoubleCheck.provider(new SwitchingProvider<ApiAppService>(singletonC, 3));
-    this.provideNewsRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<NewsRepository>(singletonC, 0));
+    this.provideCurrencyRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<CurrencyRepository>(singletonC, 0));
+    this.provideNewsRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<NewsRepository>(singletonC, 4));
   }
 
   @Override
@@ -492,7 +510,7 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
 
     @Override
     public Set<String> getViewModelKeys() {
-      return Collections.<String>singleton(NewsViewModel_HiltModules_KeyModule_ProvideFactory.provide());
+      return SetBuilder.<String>newSetBuilder(2).add(CurrencyViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(NewsViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
     }
 
     @Override
@@ -522,6 +540,8 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
 
     private final ViewModelCImpl viewModelCImpl = this;
 
+    private Provider<CurrencyViewModel> currencyViewModelProvider;
+
     private Provider<NewsViewModel> newsViewModelProvider;
 
     private ViewModelCImpl(DaggerMainApplication_HiltComponents_SingletonC singletonC,
@@ -533,18 +553,23 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
 
     }
 
+    private CurrencyViewModel currencyViewModel() {
+      return new CurrencyViewModel(singletonC.provideCurrencyRepositoryProvider.get());
+    }
+
     private NewsViewModel newsViewModel() {
       return new NewsViewModel(singletonC.provideNewsRepositoryProvider.get());
     }
 
     @SuppressWarnings("unchecked")
     private void initialize(final SavedStateHandle savedStateHandleParam) {
-      this.newsViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 0);
+      this.currencyViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 0);
+      this.newsViewModelProvider = new SwitchingProvider<>(singletonC, activityRetainedCImpl, viewModelCImpl, 1);
     }
 
     @Override
     public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
-      return Collections.<String, Provider<ViewModel>>singletonMap("ui.news.NewsViewModel", (Provider) newsViewModelProvider);
+      return MapBuilder.<String, Provider<ViewModel>>newMapBuilder(2).put("ui.checkin.CurrencyViewModel", (Provider) currencyViewModelProvider).put("ui.news.NewsViewModel", (Provider) newsViewModelProvider).build();
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -568,7 +593,10 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
       @Override
       public T get() {
         switch (id) {
-          case 0: // ui.news.NewsViewModel 
+          case 0: // ui.checkin.CurrencyViewModel 
+          return (T) viewModelCImpl.currencyViewModel();
+
+          case 1: // ui.news.NewsViewModel 
           return (T) viewModelCImpl.newsViewModel();
 
           default: throw new AssertionError(id);
@@ -661,8 +689,8 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
     @Override
     public T get() {
       switch (id) {
-        case 0: // data.repository.NewsRepository 
-        return (T) singletonC.newsRepository();
+        case 0: // data.repository.CurrencyRepository 
+        return (T) singletonC.currencyRepository();
 
         case 1: // androidx.datastore.core.DataStore<androidx.datastore.preferences.core.Preferences> 
         return (T) singletonC.dataStoreOfPreferences();
@@ -672,6 +700,9 @@ public final class DaggerMainApplication_HiltComponents_SingletonC extends MainA
 
         case 3: // data.remote.api.ApiAppService 
         return (T) singletonC.apiAppService();
+
+        case 4: // data.repository.NewsRepository 
+        return (T) singletonC.newsRepository();
 
         default: throw new AssertionError(id);
       }

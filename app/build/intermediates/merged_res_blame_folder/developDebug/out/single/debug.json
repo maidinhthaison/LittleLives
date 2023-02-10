@@ -116,6 +116,10 @@
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
+        "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/layout_currency_item.xml.flat",
+        "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/layout/currency_item.xml"
+    },
+    {
         "merged": "/Users/mac/AndroidProjects/LittleLives/app/build/intermediates/res/merged/develop/debug/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/Users/mac/AndroidProjects/LittleLives/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },

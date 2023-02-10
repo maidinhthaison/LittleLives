@@ -47,6 +47,7 @@ import di.LocalModule;
 import di.NetworkModule;
 import di.NewsRepositoryModule;
 import javax.inject.Singleton;
+import ui.checkin.CurrencyViewModel_HiltModules;
 import ui.checkin.fragment.CheckInFragment_GeneratedInjector;
 import ui.inbox.fragment.InboxFragment_GeneratedInjector;
 import ui.main.MainActivity_GeneratedInjector;
@@ -152,6 +153,7 @@ public final class MainApplication_HiltComponents {
 
   @Subcomponent(
       modules = {
+          CurrencyViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
@@ -192,6 +194,7 @@ public final class MainApplication_HiltComponents {
 
   @Subcomponent(
       modules = {
+          CurrencyViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
           NewsViewModel_HiltModules.BindsModule.class
       }

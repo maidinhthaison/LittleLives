@@ -11,5 +11,5 @@ public final class BuildConfig {
   public static final int VERSION_CODE = 1;
   public static final String VERSION_NAME = "1.0dev";
   // Field from the variant API
-  public static final String BASE_API_URL = "https://littlelives.com/";
+  public static final String BASE_API_URL = "https://coinhako.com/";
 }

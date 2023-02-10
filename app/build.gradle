@@ -99,9 +99,9 @@ android {
     applicationVariants.all { variant ->
         if (variant.getName() == "developDebug" || variant.getName() == "stagingDebug" ||
                 variant.getName() == "productionDebug") {
-            variant.buildConfigField "String", "BASE_API_URL", "\"https://littlelives.com/\""
+            variant.buildConfigField "String", "BASE_API_URL", "\"https://coinhako.com/\""
         } else {
-            variant.buildConfigField "String", "BASE_API_URL", "\"https://littlelives.com/\""
+            variant.buildConfigField "String", "BASE_API_URL", "\"https://coinhako.com/\""
         }
     }
 }

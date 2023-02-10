@@ -2128,6 +2128,7 @@ id imvEventBullet
 id imvEventItem
 id imvGridview
 id imvProfile
+id imv_currency_icon
 id inbox_menu_item
 id info
 id invisible
@@ -2256,6 +2257,7 @@ id right_side
 id rounded
 id row_index_key
 id rvEvent
+id rv_currency
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -2343,6 +2345,7 @@ id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
 id text_message
+id text_name
 id text_title
 id textinput_counter
 id textinput_error
@@ -2452,6 +2455,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
 layout app_bar_main
+layout currency_item
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
