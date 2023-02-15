@@ -1,7 +1,6 @@
 package data.local
 
 import data.Result
-import java.io.FileNotFoundException
 import java.io.IOException
 
 abstract class BaseLocalDataSource {
@@ -10,11 +9,8 @@ abstract class BaseLocalDataSource {
             val response = call()
             return Result.Success(response)
         } catch (e: Exception) {
-            if(e is FileNotFoundException){
-                return Result.FileNotFoundError
-            }
-            else if (e is IOException) {
-                return Result.IOError
+            if (e is IOException) {
+                return Result.NetworkError
             }
             return Result.UnknownError(e)
         }
